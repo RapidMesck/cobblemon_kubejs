@@ -1,8 +1,8 @@
 console.log('Cobblemon KubeJS test loaded')
 
 PlayerEvents.chat(event => {
-  const message = String(event.getMessage()).trim()
-  const player = event.getPlayer()
+  var message = String(event.getMessage()).trim()
+  var player = event.getPlayer()
 
   if (message === '!ckjs') {
     player.tell('CobblemonJS carregado: ' + !!CobblemonJS)
@@ -10,7 +10,7 @@ PlayerEvents.chat(event => {
   }
 
   if (message.startsWith('!caught ')) {
-    const species = message.substring('!caught '.length).trim()
+    var species = message.substring('!caught '.length).trim()
 
     if (!CobblemonJS.species.exists(species)) {
       player.tell(`Especie desconhecida: ${species}`)
@@ -22,7 +22,7 @@ PlayerEvents.chat(event => {
   }
 
   if (message.startsWith('!type ')) {
-    const type = message.substring('!type '.length).trim()
+    var type = message.substring('!type '.length).trim()
 
     if (!CobblemonJS.species.typeExists(type)) {
       player.tell(`Tipo desconhecido: ${type}`)

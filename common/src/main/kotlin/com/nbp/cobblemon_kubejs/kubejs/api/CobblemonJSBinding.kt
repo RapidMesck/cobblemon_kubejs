@@ -6,4 +6,10 @@ object CobblemonJSBinding {
 
     @JvmField
     val species = SpeciesJSApi
+
+    @JvmField
+    val pokemon = PokemonJSApi
+
+    @JvmField
+    val admin = AdminJSApi
 }

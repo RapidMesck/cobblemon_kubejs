@@ -16,7 +16,10 @@ class CobblemonKubeJSPlugin : KubeJSPlugin {
     override fun registerEvents(registry: EventGroupRegistry) {
         registry.register(CobblemonKubeJSEvents.GROUP)
         CobblemonKubejs.LOGGER.info(
-            "Registered CobblemonEvents: pokedexChanged, pokemonScanned, pokemonCaptured"
+            "Registered CobblemonEvents: pokedexChanged, pokemonScanned, pokemonCaptured, " +
+                "pokemonSent, pokemonFainted, battleVictory, battleDefeat, battleFled, " +
+                "evolutionComplete, levelUp, experienceGained, pokemonHealed, pokemonRecall, " +
+                "pokemonGained, pokemonReleased"
         )
     }
 
