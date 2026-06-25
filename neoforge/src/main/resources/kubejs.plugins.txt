@@ -1,0 +1,1 @@
+com.nbp.cobblemon_kubejs.kubejs.CobblemonKubeJSPlugin

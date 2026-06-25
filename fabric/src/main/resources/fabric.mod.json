@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "cobblemon_kubejs",
+  "version": "${version}",
+  "name": "Cobblemon KubeJS Bridge",
+  "description": "Cobblemon compatibility bridge. KubeJS integration is currently NeoForge-only.",
+  "authors": ["RapidMesck"],
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "com.nbp.cobblemon_kubejs.fabric.CobblemonKubejsFabric"
+      }
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.17.0",
+    "minecraft": "1.21.1",
+    "fabric-language-kotlin": "*",
+    "cobblemon": ">=1.7.0"
+  },
+  "suggests": {
+    "kubejs": "*"
+  }
+}
