@@ -3,6 +3,7 @@ package com.nbp.cobblemon_kubejs.kubejs
 import com.nbp.cobblemon_kubejs.CobblemonKubejs
 import com.nbp.cobblemon_kubejs.kubejs.api.CobblemonJSBinding
 import com.nbp.cobblemon_kubejs.kubejs.bridge.CobblemonEventBridge
+import com.nbp.cobblemon_kubejs.kubejs.client.CobblemonClientJSBinding
 import dev.latvian.mods.kubejs.event.EventGroupRegistry
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin
 import dev.latvian.mods.kubejs.script.BindingRegistry
@@ -26,6 +27,8 @@ class CobblemonKubeJSPlugin : KubeJSPlugin {
     override fun registerBindings(bindings: BindingRegistry) {
         if (bindings.type().isServer) {
             bindings.add("CobblemonJS", CobblemonJSBinding)
+        } else if (bindings.type().isClient) {
+            bindings.add("CobblemonClientJS", CobblemonClientJSBinding)
         }
     }
 }

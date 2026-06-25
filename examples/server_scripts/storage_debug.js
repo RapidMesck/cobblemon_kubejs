@@ -68,4 +68,20 @@ PlayerEvents.chat(event => {
     player.tell(`${type}: party=${partyTypeCount} PC=${pcTypeCount} total=${totalTypeCount}`)
     event.cancel()
   }
+
+  if (message.startsWith('!pokemonuuid ')) {
+    var pokemonUuid = message.substring('!pokemonuuid '.length).trim()
+    var pokemonByUuid = CobblemonJS.pokemon.getByUuid(player, pokemonUuid)
+
+    if (!pokemonByUuid) {
+      player.tell(`Pokemon nao encontrado: ${pokemonUuid}`)
+      event.cancel()
+    }
+
+    player.tell(
+      `${pokemonByUuid.species} lvl ${pokemonByUuid.level} ` +
+      `storage=${pokemonByUuid.storage} box=${pokemonByUuid.box} slot=${pokemonByUuid.slot}`
+    )
+    event.cancel()
+  }
 })

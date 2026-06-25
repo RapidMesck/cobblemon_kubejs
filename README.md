@@ -13,6 +13,48 @@ Read-only, server-side bridge between Cobblemon and KubeJS.
 The Fabric module is currently a compile-only stub and does not expose KubeJS
 events or bindings.
 
+## Client Pokedex API
+
+NeoForge synchronizes a read-only Pokedex snapshot from the server to the
+owning client. Incremental updates are sent when the Pokedex changes.
+
+Available in `kubejs/client_scripts/`:
+
+```js
+CobblemonClientJS.pokedex.isReady()
+CobblemonClientJS.pokedex.getProgress('charizard')
+CobblemonClientJS.pokedex.hasSeen('charizard')
+CobblemonClientJS.pokedex.hasCaught('charizard')
+CobblemonClientJS.pokedex.countSeen()
+CobblemonClientJS.pokedex.countCaught()
+CobblemonClientJS.pokedex.countSeenByType('fire')
+CobblemonClientJS.pokedex.countCaughtByType('fire')
+```
+
+Tooltip example:
+
+```js
+ItemEvents.modifyTooltips(event => {
+  event.modify('minecraft:spyglass', tooltip => {
+    tooltip.dynamic('cobblemon_kubejs:pokedex')
+  })
+})
+
+ItemEvents.dynamicTooltips('cobblemon_kubejs:pokedex', event => {
+  if (!CobblemonClientJS.pokedex.isReady()) return
+  event.add([
+    Text.gold(`Vistos: ${CobblemonClientJS.pokedex.countSeen()}`),
+    Text.green(`Capturados: ${CobblemonClientJS.pokedex.countCaught()}`)
+  ])
+})
+```
+
+`modifyTooltips` attaches a dynamic action ID to the item, while
+`dynamicTooltips` supplies the live lines for that ID. The dynamic event target
+is an action ID, not an item ID. The tooltip only reads local cache state and
+never sends a packet while rendering. The cache is replaced on login/data
+synchronization, updated after Pokedex changes, and cleared when disconnecting.
+
 ## Server scripts
 
 Scripts belong in `kubejs/server_scripts/`.
@@ -198,6 +240,9 @@ CobblemonJS.species.idsByType('water')
 
 CobblemonJS.pokemon.getParty(player)
 CobblemonJS.pokemon.getPC(player)
+CobblemonJS.pokemon.getByUuid(player, pokemonUuid)
+CobblemonJS.pokemon.getPartyByUuid(player, pokemonUuid)
+CobblemonJS.pokemon.getPCByUuid(player, pokemonUuid)
 CobblemonJS.pokemon.countPartyByType(player, 'water')
 CobblemonJS.pokemon.countPCByType(player, 'water')
 CobblemonJS.pokemon.countStorageByType(player, 'water')

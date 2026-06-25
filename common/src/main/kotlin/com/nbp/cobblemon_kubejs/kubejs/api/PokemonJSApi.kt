@@ -3,6 +3,7 @@ package com.nbp.cobblemon_kubejs.kubejs.api
 import com.cobblemon.mod.common.Cobblemon
 import com.nbp.cobblemon_kubejs.kubejs.util.SpeciesUtil
 import com.nbp.cobblemon_kubejs.kubejs.util.TypeUtil
+import java.util.UUID
 import net.minecraft.server.level.ServerPlayer
 
 object PokemonJSApi {
@@ -22,6 +23,32 @@ object PokemonJSApi {
                 }
             }
         }
+    }
+
+    fun getPartyByUuid(player: ServerPlayer, pokemonUuid: String): PokemonJSView? {
+        val uuid = parseUuid(pokemonUuid)
+        val party = Cobblemon.storage.getParty(player)
+        return party.toGappyList().mapIndexedNotNull { slot, pokemon ->
+            pokemon?.takeIf { it.uuid == uuid }?.let {
+                PokemonJSView(it, storage = "party", slot = slot)
+            }
+        }.firstOrNull()
+    }
+
+    fun getPCByUuid(player: ServerPlayer, pokemonUuid: String): PokemonJSView? {
+        val uuid = parseUuid(pokemonUuid)
+        val pc = Cobblemon.storage.getPC(player)
+        return pc.boxes.asSequence().flatMapIndexed { boxIndex, box ->
+            box.toList().asSequence().mapIndexedNotNull { slot, pokemon ->
+                pokemon?.takeIf { it.uuid == uuid }?.let {
+                    PokemonJSView(it, storage = "pc", slot = slot, box = boxIndex)
+                }
+            }
+        }.firstOrNull()
+    }
+
+    fun getByUuid(player: ServerPlayer, pokemonUuid: String): PokemonJSView? {
+        return getPartyByUuid(player, pokemonUuid) ?: getPCByUuid(player, pokemonUuid)
     }
 
     fun countPartyByType(player: ServerPlayer, typeName: String): Int {
@@ -66,6 +93,16 @@ object PokemonJSApi {
     ): Boolean {
         return pokemon.form.types.any {
             it.showdownId().equals(wantedType, ignoreCase = true)
+        }
+    }
+
+    private fun parseUuid(value: String): UUID {
+        return try {
+            UUID.fromString(value.trim())
+        } catch (_: IllegalArgumentException) {
+            throw IllegalArgumentException(
+                "Invalid Pokemon UUID: '$value'. Expected format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx."
+            )
         }
     }
 }

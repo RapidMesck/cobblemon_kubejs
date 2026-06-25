@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.7.0 - 2026-06-25
+
+### Added
+
+- Read-only Pokemon lookup by UUID in party.
+- Read-only Pokemon lookup by UUID in PC.
+- Combined party + PC lookup with storage position metadata.
+
+## 1.6.0 - 2026-06-25
+
+### Added
+
+- Server-to-client Pokedex synchronization.
+- Full snapshot on login and Cobblemon data synchronization.
+- Incremental updates after Pokedex changes.
+- Client cache cleared on disconnect.
+- `CobblemonClientJS.pokedex` binding for client scripts.
+- Client-side progress, seen/caught, and type-count queries.
+- Tooltip example without per-frame network requests.
+
 ## 1.5.0 - 2026-06-25
 
 ### Added

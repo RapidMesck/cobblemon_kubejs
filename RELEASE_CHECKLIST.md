@@ -54,3 +54,12 @@
 - [ ] Release a Pokemon from party and PC and verify `pokemonReleased`.
 - [ ] Spawn a Pokemon in front of the player.
 - [ ] Verify invalid properties produce a descriptive script error.
+
+## Version 1.6 runtime verification
+
+- [ ] Join a world and verify `CobblemonClientJS.pokedex.isReady()`.
+- [ ] Add `pokedex_tooltip.js` to `client_scripts`.
+- [ ] Verify total and type counts in the spyglass tooltip.
+- [ ] Scan a new Pokemon and verify the tooltip updates without reconnecting.
+- [ ] Capture a Pokemon and verify seen/caught counts update.
+- [ ] Disconnect and verify old server data is not shown on another server.

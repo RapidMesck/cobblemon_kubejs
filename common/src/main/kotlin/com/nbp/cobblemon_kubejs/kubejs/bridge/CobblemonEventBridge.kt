@@ -1,8 +1,10 @@
 package com.nbp.cobblemon_kubejs.kubejs.bridge
 
 import com.cobblemon.mod.common.api.events.CobblemonEvents
+import com.cobblemon.mod.common.util.getPlayer
 import com.nbp.cobblemon_kubejs.CobblemonKubejs
 import com.nbp.cobblemon_kubejs.kubejs.CobblemonKubeJSEvents
+import com.nbp.cobblemon_kubejs.kubejs.client.PokedexClientSync
 import com.nbp.cobblemon_kubejs.kubejs.event.BattleDefeatEventJS
 import com.nbp.cobblemon_kubejs.kubejs.event.BattleFledEventJS
 import com.nbp.cobblemon_kubejs.kubejs.event.BattleVictoryEventJS
@@ -35,12 +37,23 @@ object CobblemonEventBridge {
         CobblemonKubejs.LOGGER.info("Subscribing Cobblemon events for KubeJS bridge")
 
         CobblemonEvents.POKEDEX_DATA_CHANGED_POST.subscribe { event ->
+            event.playerUUID.getPlayer()?.let { player ->
+                PokedexClientSync.sendUpdate(
+                    player,
+                    event.record.speciesDexRecord.id.toString()
+                )
+            }
+
             if (CobblemonKubeJSEvents.POKEDEX_CHANGED.hasListeners()) {
                 CobblemonKubeJSEvents.POKEDEX_CHANGED.post(
                     ScriptType.SERVER,
                     PokedexChangedEventJS(event)
                 )
             }
+        }
+
+        CobblemonEvents.DATA_SYNCHRONIZED.subscribe { player ->
+            PokedexClientSync.sendSnapshot(player)
         }
 
         CobblemonEvents.POKEMON_SCANNED.subscribe { event ->
