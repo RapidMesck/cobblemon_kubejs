@@ -7,27 +7,28 @@ PlayerEvents.chat(event => {
     message.startsWith('!spawnpokemon ')
 
   if (isAdminCommand && !player.hasPermissions(2)) {
-    player.tell('Sem permissao para comandos administrativos.')
+    player.tell('You do not have permission to use administrative commands.')
     event.cancel()
+    return
   }
 
   if (message.startsWith('!givepokemon ')) {
     var properties = message.substring('!givepokemon '.length).trim()
     var given = CobblemonJS.admin.givePokemon(player, properties)
-    player.tell(`Recebeu ${given.species} lvl ${given.level}`)
+    player.tell(`Received ${given.species} at level ${given.level}.`)
     event.cancel()
   }
 
   if (message === '!healparty') {
     var healed = CobblemonJS.admin.healParty(player)
-    player.tell(`Party curada: ${healed} Pokemon alterados`)
+    player.tell(`Party healed: ${healed} Pokemon changed.`)
     event.cancel()
   }
 
   if (message.startsWith('!spawnpokemon ')) {
     var spawnProperties = message.substring('!spawnpokemon '.length).trim()
     var spawned = CobblemonJS.admin.spawnPokemon(player, spawnProperties)
-    player.tell(`Spawnado ${spawned.species} lvl ${spawned.level}`)
+    player.tell(`Spawned ${spawned.species} at level ${spawned.level}.`)
     event.cancel()
   }
 })

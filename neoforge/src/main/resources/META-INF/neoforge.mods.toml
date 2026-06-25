@@ -8,7 +8,7 @@ version = "${version}"
 displayName = "${mod_name}"
 authors = "RapidMesck"
 description = '''
-Server-side bridge exposing Cobblemon events and read-only data to KubeJS.
+Cobblemon KubeJS Integration
 '''
 
 [[dependencies.cobblemon_kubejs]]

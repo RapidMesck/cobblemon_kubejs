@@ -6,6 +6,6 @@ CobblemonEvents.pokedexChanged(event => {
   if (caughtFire >= 10 && !event.player.persistentData.gotFireReward) {
     event.player.persistentData.gotFireReward = true
     event.player.give('minecraft:diamond')
-    event.player.tell('Recompensa: 10 Pokémon de fogo capturados!')
+    event.player.tell('Reward unlocked: caught 10 Fire-type Pokemon!')
   }
 })

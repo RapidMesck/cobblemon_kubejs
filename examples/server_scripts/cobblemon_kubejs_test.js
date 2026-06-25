@@ -5,7 +5,7 @@ PlayerEvents.chat(event => {
   var player = event.getPlayer()
 
   if (message === '!ckjs') {
-    player.tell('CobblemonJS carregado: ' + !!CobblemonJS)
+    player.tell('CobblemonJS loaded: ' + !!CobblemonJS)
     event.cancel()
   }
 
@@ -13,8 +13,9 @@ PlayerEvents.chat(event => {
     var species = message.substring('!caught '.length).trim()
 
     if (!CobblemonJS.species.exists(species)) {
-      player.tell(`Especie desconhecida: ${species}`)
+      player.tell(`Unknown species: ${species}`)
       event.cancel()
+      return
     }
 
     player.tell(`${species}: ${CobblemonJS.pokedex.hasCaught(player, species)}`)
@@ -25,9 +26,10 @@ PlayerEvents.chat(event => {
     var type = message.substring('!type '.length).trim()
 
     if (!CobblemonJS.species.typeExists(type)) {
-      player.tell(`Tipo desconhecido: ${type}`)
-      player.tell(`Tipos validos: ${CobblemonJS.species.allTypes().join(', ')}`)
+      player.tell(`Unknown type: ${type}`)
+      player.tell(`Valid types: ${CobblemonJS.species.allTypes().join(', ')}`)
       event.cancel()
+      return
     }
 
     player.tell(`Seen ${type}: ${CobblemonJS.pokedex.countSeenByType(player, type)}`)

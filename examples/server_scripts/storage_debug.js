@@ -17,15 +17,17 @@ PlayerEvents.chat(event => {
     var infoPartySlots = CobblemonJS.pokemon.getParty(player)
 
     if (!Number.isInteger(requestedSlot) || requestedSlot < 0 || requestedSlot >= 6) {
-      player.tell('Use !partyinfo <slot de 1 a 6>')
+      player.tell('Usage: !partyinfo <slot from 1 to 6>')
       event.cancel()
+      return
     }
 
     var selectedPokemon = infoPartySlots.get(requestedSlot)
 
     if (!selectedPokemon) {
-      player.tell(`Nenhum Pokemon no slot ${requestedSlot + 1}`)
+      player.tell(`No Pokemon in slot ${requestedSlot + 1}`)
       event.cancel()
+      return
     }
 
     player.tell(`${selectedPokemon.species} lvl ${selectedPokemon.level}`)
@@ -43,8 +45,9 @@ PlayerEvents.chat(event => {
   if (message.startsWith('!storagecount ')) {
     var species = message.substring('!storagecount '.length).trim()
     if (!CobblemonJS.species.exists(species)) {
-      player.tell(`Especie desconhecida: ${species}`)
+      player.tell(`Unknown species: ${species}`)
       event.cancel()
+      return
     }
 
     var partyCount = CobblemonJS.pokemon.countPartyBySpecies(player, species)
@@ -57,9 +60,10 @@ PlayerEvents.chat(event => {
   if (message.startsWith('!storagetype ')) {
     var type = message.substring('!storagetype '.length).trim()
     if (!CobblemonJS.species.typeExists(type)) {
-      player.tell(`Tipo desconhecido: ${type}`)
-      player.tell(`Tipos validos: ${CobblemonJS.species.allTypes().join(', ')}`)
+      player.tell(`Unknown type: ${type}`)
+      player.tell(`Valid types: ${CobblemonJS.species.allTypes().join(', ')}`)
       event.cancel()
+      return
     }
 
     var partyTypeCount = CobblemonJS.pokemon.countPartyByType(player, type)
@@ -74,8 +78,9 @@ PlayerEvents.chat(event => {
     var pokemonByUuid = CobblemonJS.pokemon.getByUuid(player, pokemonUuid)
 
     if (!pokemonByUuid) {
-      player.tell(`Pokemon nao encontrado: ${pokemonUuid}`)
+      player.tell(`Pokemon not found: ${pokemonUuid}`)
       event.cancel()
+      return
     }
 
     player.tell(

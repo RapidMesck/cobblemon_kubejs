@@ -6,19 +6,19 @@ ItemEvents.modifyTooltips((event) => {
 
 ItemEvents.dynamicTooltips("cobblemon_kubejs:pokedex", (event) => {
   if (!CobblemonClientJS.pokedex.isReady()) {
-    event.add([Text.gray("Sincronizando Pokedex...")]);
+    event.add([Text.gray("Synchronizing Pokedex...")]);
     return;
   }
 
   event.add([
     Text.gray("Pokedex"),
-    Text.gold(`Vistos: ${CobblemonClientJS.pokedex.countSeen()}`),
-    Text.green(`Capturados: ${CobblemonClientJS.pokedex.countCaught()}`),
+    Text.gold(`Seen: ${CobblemonClientJS.pokedex.countSeen()}`),
+    Text.green(`Caught: ${CobblemonClientJS.pokedex.countCaught()}`),
     Text.red(
-      `Fire vistos: ${CobblemonClientJS.pokedex.countSeenByType("fire")}`,
+      `Fire seen: ${CobblemonClientJS.pokedex.countSeenByType("fire")}`,
     ),
     Text.red(
-      `Fire capturados: ${CobblemonClientJS.pokedex.countCaughtByType("fire")}`,
+      `Fire caught: ${CobblemonClientJS.pokedex.countCaughtByType("fire")}`,
     ),
   ]);
 });

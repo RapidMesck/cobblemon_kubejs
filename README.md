@@ -1,6 +1,7 @@
 # Cobblemon KubeJS Bridge
 
-Read-only, server-side bridge between Cobblemon and KubeJS.
+Cobblemon and KubeJS integration for server events, read-only queries,
+administrative helpers, and synchronized client-side Pokedex displays.
 
 ## Supported target
 
@@ -12,6 +13,8 @@ Read-only, server-side bridge between Cobblemon and KubeJS.
 
 The Fabric module is currently a compile-only stub and does not expose KubeJS
 events or bindings.
+
+Complete documentation is available in the [`wiki/`](wiki/README.md) directory.
 
 ## Client Pokedex API
 
@@ -43,8 +46,8 @@ ItemEvents.modifyTooltips(event => {
 ItemEvents.dynamicTooltips('cobblemon_kubejs:pokedex', event => {
   if (!CobblemonClientJS.pokedex.isReady()) return
   event.add([
-    Text.gold(`Vistos: ${CobblemonClientJS.pokedex.countSeen()}`),
-    Text.green(`Capturados: ${CobblemonClientJS.pokedex.countCaught()}`)
+    Text.gold(`Seen: ${CobblemonClientJS.pokedex.countSeen()}`),
+    Text.green(`Caught: ${CobblemonClientJS.pokedex.countCaught()}`)
   ])
 })
 ```
@@ -62,7 +65,7 @@ Scripts belong in `kubejs/server_scripts/`.
 ```js
 CobblemonEvents.pokedexChanged(event => {
   if (event.isCaught && event.player) {
-    event.player.tell(`Você capturou ${event.species}!`)
+    event.player.tell(`You caught ${event.species}!`)
   }
 })
 
@@ -73,7 +76,7 @@ PlayerEvents.chat(event => {
 
   const seen = CobblemonJS.pokedex.countSeenByType(player, 'fire')
   const caught = CobblemonJS.pokedex.countCaughtByType(player, 'fire')
-  player.tell(`Fire: ${seen} vistos, ${caught} capturados.`)
+  player.tell(`Fire: ${seen} seen, ${caught} caught.`)
   event.cancel()
 })
 ```
@@ -339,7 +342,3 @@ CobblemonJS.admin.spawnPokemon(
 ```
 
 The properties string uses Cobblemon's standard PokemonProperties syntax.
-
-## Release verification
-
-See `RELEASE_CHECKLIST.md` for automated and manual verification steps.
