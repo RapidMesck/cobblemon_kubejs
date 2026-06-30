@@ -168,6 +168,79 @@ var speciesIds = CobblemonJS.species.allIds()
 | Return | `List<String>` |
 | --- | --- |
 
+### `listAll()` / `listAllSpecies()`
+
+Aliases of `allIds()` for scripts that prefer list helper naming.
+
+```js
+var allSpecies = CobblemonJS.species.listAll()
+```
+
+| Return | `List<String>` |
+| --- | --- |
+
+### `allLabels()`
+
+Returns all labels used by implemented species.
+
+```js
+var labels = CobblemonJS.species.allLabels()
+```
+
+| Return | `List<String>` |
+| --- | --- |
+
+### `labelExists(labelName)`
+
+Returns whether any implemented species uses the requested label. Label input is
+case-insensitive and accepts spaces or hyphens as underscores.
+
+```js
+var hasUltraBeastLabel = CobblemonJS.species.labelExists('ultra-beast')
+```
+
+| Return | `Boolean` |
+| --- | --- |
+
+### `idsByLabel(labelName)`
+
+Returns all implemented species with the requested Cobblemon label, sorted by
+ID. Useful labels include `legendary`, `mythical`, `ultra_beast`,
+`restricted`, and `paradox`.
+
+```js
+var legendaries = CobblemonJS.species.idsByLabel('legendary')
+var ultraBeasts = CobblemonJS.species.idsByLabel('ultra-beast')
+```
+
+| Return | `List<String>` |
+| --- | --- |
+
+### List helpers by label
+
+Convenience helpers for common species categories.
+
+```js
+CobblemonJS.species.listLegendary()
+CobblemonJS.species.listMythical()
+CobblemonJS.species.listUltraBeasts()
+CobblemonJS.species.listRestricted()
+CobblemonJS.species.listParadox()
+```
+
+The `*Species()` aliases are also available:
+
+```js
+CobblemonJS.species.listLegendarySpecies()
+CobblemonJS.species.listMythicalSpecies()
+CobblemonJS.species.listUltraBeastSpecies()
+CobblemonJS.species.listRestrictedSpecies()
+CobblemonJS.species.listParadoxSpecies()
+```
+
+| Return | `List<String>` |
+| --- | --- |
+
 ### `typeExists(typeName)`
 
 Returns whether an elemental type exists. Matching is case-insensitive.

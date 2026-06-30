@@ -3,6 +3,7 @@ package com.nbp.cobblemon_kubejs.kubejs.event
 import com.cobblemon.mod.common.api.battles.model.actor.ActorType
 import com.cobblemon.mod.common.api.events.battles.BattleVictoryEvent
 import com.cobblemon.mod.common.util.getPlayer
+import com.nbp.cobblemon_kubejs.kubejs.api.PokemonJSView
 import dev.latvian.mods.kubejs.event.KubeEvent
 import net.minecraft.server.level.ServerPlayer
 import kotlin.jvm.JvmName
@@ -28,6 +29,12 @@ class BattleVictoryEventJS(
 
     val loserPlayerUuids: List<String>
         get() = event.losers.flatMap { it.getPlayerUUIDs() }.map { it.toString() }
+
+    val winnerTeam: List<PokemonJSView>
+        get() = event.winners.toPokemonViews()
+
+    val loserTeam: List<PokemonJSView>
+        get() = event.losers.toPokemonViews()
 
     val winnerTypes: List<String>
         get() = event.winners.map { it.type.name.lowercase() }

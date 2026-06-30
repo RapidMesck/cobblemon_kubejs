@@ -149,6 +149,8 @@ Fires once for a completed battle and presents the winning side as the subject.
 | `loserPlayers` | `List<ServerPlayer>` | Online losing players |
 | `winnerPlayerUuids` | `List<String>` | Winning player UUIDs |
 | `loserPlayerUuids` | `List<String>` | Losing player UUIDs |
+| `winnerTeam` | `List<PokemonJSView>` | Pokemon used by the winning actors |
+| `loserTeam` | `List<PokemonJSView>` | Pokemon used by the losing actors |
 | `winnerTypes` | `List<String>` | Winning actor types |
 | `loserTypes` | `List<String>` | Losing actor types |
 | `wasWildCapture` | `Boolean` | Battle ended through a wild capture |
@@ -177,6 +179,9 @@ side as the subject.
 | `defeatedPlayerUuids` | `List<String>` | Defeated player UUIDs |
 | `winnerPlayers` | `List<ServerPlayer>` | Online winning players |
 | `winnerPlayerUuids` | `List<String>` | Winning player UUIDs |
+| `defeatedTeam` | `List<PokemonJSView>` | Pokemon used by the defeated actors |
+| `loserTeam` | `List<PokemonJSView>` | Alias of `defeatedTeam` |
+| `winnerTeam` | `List<PokemonJSView>` | Pokemon used by the winning actors |
 | `defeatedTypes` | `List<String>` | Defeated actor types |
 | `winnerTypes` | `List<String>` | Winning actor types |
 | `forfeitingPlayerUuids` | `List<String>` | Players detected as forfeiting |

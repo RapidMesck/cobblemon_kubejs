@@ -165,6 +165,7 @@ Exposes:
 - `battleId`
 - `winnerPlayers` and `loserPlayers`
 - `winnerPlayerUuids` and `loserPlayerUuids`
+- `winnerTeam` and `loserTeam`
 - `winnerTypes` and `loserTypes`
 - `wasWildCapture`
 - `isPvp`, `isPvn`, and `isPvw`
@@ -180,6 +181,7 @@ Exposes:
 - `battleId`
 - `defeatedPlayers` and `defeatedPlayerUuids`
 - `winnerPlayers` and `winnerPlayerUuids`
+- `defeatedTeam`, `loserTeam`, and `winnerTeam`
 - `defeatedTypes` and `winnerTypes`
 - `forfeitingPlayerUuids`
 - `wasForfeit` and `wasWildCapture`
@@ -237,6 +239,15 @@ CobblemonJS.pokedex.countByType(player, 'fire', 'seen')
 CobblemonJS.species.exists('charizard')
 CobblemonJS.species.getTypes('charizard')
 CobblemonJS.species.allIds()
+CobblemonJS.species.listAll()
+CobblemonJS.species.listLegendary()
+CobblemonJS.species.listMythical()
+CobblemonJS.species.listUltraBeasts()
+CobblemonJS.species.listRestricted()
+CobblemonJS.species.listParadox()
+CobblemonJS.species.allLabels()
+CobblemonJS.species.labelExists('ultra-beast')
+CobblemonJS.species.idsByLabel('legendary')
 CobblemonJS.species.typeExists('water')
 CobblemonJS.species.allTypes()
 CobblemonJS.species.idsByType('water')

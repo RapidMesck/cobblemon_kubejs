@@ -36,6 +36,22 @@ PlayerEvents.chat(event => {
     player.tell(`Caught ${type}: ${CobblemonJS.pokedex.countCaughtByType(player, type)}`)
     event.cancel()
   }
+
+  if (message.startsWith('!specieslabel ')) {
+    var label = message.substring('!specieslabel '.length).trim()
+
+    if (!CobblemonJS.species.labelExists(label)) {
+      player.tell(`Unknown species label: ${label}`)
+      player.tell(`Known labels: ${CobblemonJS.species.allLabels().join(', ')}`)
+      event.cancel()
+      return
+    }
+
+    var species = CobblemonJS.species.idsByLabel(label)
+    player.tell(`${label}: ${species.size()} species`)
+    player.tell(Array.from(species).slice(0, 12).join(', '))
+    event.cancel()
+  }
 })
 
 CobblemonEvents.pokedexChanged(event => {
